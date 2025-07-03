@@ -83,8 +83,10 @@ else:
     explainer = shap.Explainer(best_model.predict, X_test)
 
 shap_values = explainer(X_test)
-fig_summary = shap.plots.beeswarm(shap_values, max_display=10, show=False)
-st.pyplot(bbox_inches='tight', pad_inches=0)
+fig_summary = plt.gcf()
+shap.plots.beeswarm(shap_values, max_display=10)
+st.pyplot(fig_summary, bbox_inches='tight', pad_inches=0)
+
 
 # Explain selected patient
 st.subheader(f"Patient {patient_index} Risk Explanation")
@@ -102,8 +104,10 @@ else:
 
 # Display waterfall plot
 st.subheader("Top Contributing Features")
-fig_waterfall = shap.plots.waterfall(shap_values[patient_index], max_display=10, show=False)
-st.pyplot(bbox_inches='tight', pad_inches=0)
+fig_waterfall = plt.gcf()
+shap.plots.waterfall(shap_values[patient_index], max_display=10)
+st.pyplot(fig_waterfall, bbox_inches='tight', pad_inches=0)
+
 
 # Show top 5 reasons
 st.subheader("AI Explanation Summary")
